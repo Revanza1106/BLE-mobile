@@ -50,6 +50,8 @@ class NotificationService {
     String? cancelText = "Cancel",
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
+    Color? confirmButtonColor,
+    Color? cancelButtonColor,
   }) async {
     try {
       final result = await showDialog<bool>(
@@ -60,6 +62,9 @@ class NotificationService {
           actions: [
             if (cancelText != null)
               TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: cancelButtonColor ?? Colors.grey,
+                ),
                 onPressed: () {
                   Navigator.of(dialogContext).pop(false);
                   onCancel?.call();
@@ -68,6 +73,10 @@ class NotificationService {
               ),
             if (confirmText != null)
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: confirmButtonColor ?? Colors.red,
+                  foregroundColor: Colors.white,
+                ),
                 onPressed: () {
                   Navigator.of(dialogContext).pop(true);
                   onConfirm?.call();
