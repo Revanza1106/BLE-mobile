@@ -120,14 +120,12 @@ class DoorBluetoothService {
         for (var characteristic in service.characteristics) {
           final uuid = characteristic.uuid.toString().toLowerCase();
 
-          // Serial characteristic
           if (uuid.contains(AppConstants.serialUuid.substring(0, 8))) {
             final bytes = await characteristic.read();
             deviceSerial = String.fromCharCodes(bytes).trim();
             Logger.i('Device serial: $deviceSerial', tag: 'DoorBluetoothService');
           }
 
-          // Control characteristic
           if (uuid.contains(AppConstants.controlUuid.substring(0, 8))) {
             _controlCharacteristic = characteristic;
             await characteristic.setNotifyValue(true);
@@ -147,7 +145,6 @@ class DoorBluetoothService {
       throw Exception('Serial characteristic not found');
     }
 
-    // Note: Serial validation should be handled by the caller
   }
 
   void _onNotificationReceived(List<int> data) {
@@ -157,7 +154,6 @@ class DoorBluetoothService {
 
       _notificationController.add(value);
 
-      // Update door status based on notification
       if (value.contains("Open")) {
         _updateDoorStatus(DoorStatus.open);
       } else {

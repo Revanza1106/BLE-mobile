@@ -5,7 +5,6 @@ import '../core/utils/logger.dart';
 class SettingsViewModel extends ChangeNotifier {
   StorageService? _storageService;
 
-  // Form controllers
   final TextEditingController nameController = TextEditingController();
   final TextEditingController serialController = TextEditingController();
   final TextEditingController secretController = TextEditingController();
@@ -16,7 +15,6 @@ class SettingsViewModel extends ChangeNotifier {
 
   SettingsViewModel();
 
-  // Static factory for proper async initialization
   static Future<SettingsViewModel> create() async {
     try {
       final storageService = await StorageService.getInstance();
@@ -27,12 +25,10 @@ class SettingsViewModel extends ChangeNotifier {
       return viewModel;
     } catch (e) {
       Logger.e('Failed to create SettingsViewModel', error: e.toString(), tag: 'SettingsViewModel');
-      // Return a ViewModel with error state
       return SettingsViewModel._(null);
     }
   }
 
-  // Private constructor
   SettingsViewModel._(this._storageService);
 
   Future<void> loadSettings() async {
@@ -64,7 +60,6 @@ class SettingsViewModel extends ChangeNotifier {
     }
   }
 
-  // Getters
   bool get isLoading => _isLoading;
   bool get isSaving => _isSaving;
   String? get errorMessage => _errorMessage;
@@ -76,7 +71,6 @@ class SettingsViewModel extends ChangeNotifier {
       _setSaving(true);
       _clearError();
 
-      // Validate inputs
       final name = nameController.text.trim();
       final serial = serialController.text.trim();
       final secret = secretController.text.trim();
@@ -128,7 +122,6 @@ class SettingsViewModel extends ChangeNotifier {
       if (_storageService != null) {
         await _storageService!.clearAll();
 
-        // Clear controllers
         nameController.clear();
         serialController.clear();
         secretController.clear();
@@ -213,7 +206,6 @@ class SettingsViewModel extends ChangeNotifier {
   void dispose() {
     Logger.d('Disposing SettingsViewModel', tag: 'SettingsViewModel');
 
-    // Dispose controllers
     nameController.dispose();
     serialController.dispose();
     secretController.dispose();

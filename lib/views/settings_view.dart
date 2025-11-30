@@ -35,15 +35,12 @@ class _SettingsViewState extends State<SettingsView> {
     if (mounted) {
       final viewModel = widget.viewModel;
 
-      // Show error messages
       if (viewModel.errorMessage != null) {
         _notificationService.showError(context, viewModel.errorMessage!);
       }
 
-      // Handle save success
       if (!viewModel.isSaving && !viewModel.isLoading) {
         if (viewModel.errorMessage == null) {
-          // Settings were successfully saved
           widget.onSaved?.call();
           Navigator.pop(context);
         }
@@ -77,6 +74,8 @@ class _SettingsViewState extends State<SettingsView> {
       content: "Are you sure you want to delete all saved settings? This action cannot be undone.",
       confirmText: "Delete",
       cancelText: "Cancel",
+      confirmButtonColor: Colors.red,
+      cancelButtonColor: Colors.grey,
     );
   }
 
@@ -178,7 +177,6 @@ class _SettingsViewState extends State<SettingsView> {
                   ),
                   const SizedBox(height: 32),
 
-                  // Action Buttons
                   Row(
                     children: [
                       Expanded(
@@ -202,7 +200,6 @@ class _SettingsViewState extends State<SettingsView> {
 
                   const SizedBox(height: 16),
 
-                  // Settings Status
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
