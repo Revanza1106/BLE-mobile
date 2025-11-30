@@ -9,11 +9,9 @@ import 'core/constants/app_constants.dart';
 
 void main() async {
   Logger.i('Starting Smart Door App', tag: 'App');
-  DebugHelper.setDebugMode(true); // Set to false in production
+  DebugHelper.setDebugMode(true); 
 
-  // Initialize app with error handling
   try {
-    // Request permissions
     await _requestPermissions();
 
     Logger.i('App initialized successfully', tag: 'App');
@@ -49,7 +47,6 @@ Future<void> _requestPermissions() async {
     Logger.d('Permissions requested successfully', tag: 'Permissions');
   } catch (e) {
     Logger.e('Failed to request permissions', error: e.toString(), tag: 'Permissions');
-    // Continue without permissions - app will handle permission errors gracefully
   }
 }
 

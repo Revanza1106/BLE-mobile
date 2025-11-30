@@ -14,7 +14,6 @@ class StorageService {
     return _instance!;
   }
 
-  // App Settings
   Future<String> getAppName() async {
     try {
       return _preferences?.getString(AppConstants.nameKey) ?? AppConstants.defaultName;
@@ -69,7 +68,6 @@ class StorageService {
     }
   }
 
-  // Check if all required settings are available
   Future<bool> hasAllRequiredSettings() async {
     try {
       final serial = await getSerialNumber();
@@ -81,7 +79,6 @@ class StorageService {
     }
   }
 
-  // Clear all data
   Future<void> clearAll() async {
     try {
       await _preferences?.clear();
@@ -91,7 +88,6 @@ class StorageService {
     }
   }
 
-  // Save all settings at once
   Future<void> saveSettings({
     required String name,
     required String serial,

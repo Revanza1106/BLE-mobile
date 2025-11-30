@@ -1,7 +1,7 @@
 import '../utils/logger.dart';
 
 class DebugHelper {
-  static bool _debugMode = true; // Set to false in production
+  static bool _debugMode = true; 
 
   static void setDebugMode(bool enabled) {
     _debugMode = enabled;
@@ -146,8 +146,6 @@ class DebugHelper {
   static void checkMemoryUsage() {
     if (!_debugMode) return;
 
-    // This is a simple memory check - in a real app you might want to use
-    // dart:developer or a profiling package
     Logger.d('🧠 Memory check requested', tag: 'Memory');
     printStackTrace(tag: 'Memory');
   }
@@ -186,8 +184,8 @@ class DebugHelper {
 
     final report = {
       'timestamp': DateTime.now().toIso8601String(),
-      'appVersion': '1.0.0', // This should come from your app config
-      'platform': 'Flutter', // This should be detected dynamically
+      'appVersion': '1.0.0', 
+      'platform': 'Flutter', 
       ...additionalInfo,
     };
 

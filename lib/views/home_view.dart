@@ -34,7 +34,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
-    // Listen for state changes
     widget.viewModel.addListener(_onViewModelChanged);
   }
 
@@ -49,7 +48,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     if (mounted) {
       final doorState = widget.viewModel.doorState;
 
-      // Handle animation based on operating state
       if (doorState.isOperating) {
         _pulseController.repeat(reverse: true);
       } else {
@@ -57,12 +55,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         _pulseController.reset();
       }
 
-      // Show error messages
       if (doorState.errorMessage != null) {
         _notificationService.showError(context, doorState.errorMessage!);
       }
 
-      // Show success messages
       if (doorState.status == DoorStatus.connected) {
         _notificationService.showSuccess(context, "Connected!");
       }
@@ -178,7 +174,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
               const SizedBox(height: 60),
 
-              // Control Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -210,7 +205,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
               const SizedBox(height: 40),
 
-              // Settings Button
               OutlinedButton.icon(
                 onPressed: () async {
                   try {
