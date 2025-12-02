@@ -65,7 +65,6 @@ class DoorBluetoothService {
         },
       );
 
-      // Stop scan after timeout
       await Future.delayed(const Duration(seconds: 8));
       await FlutterBluePlus.stopScan();
       _scanSubscription?.cancel();
